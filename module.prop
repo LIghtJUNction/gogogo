@@ -1,0 +1,7 @@
+id = "gogogo"
+name = "gogogo"
+version = "v1.0.1-ff0afcd"
+versionCode = "2025060901"
+author = "LIghtJUNction"
+description = "RMM项目 gogogo"
+updateJson = "https://raw.githubusercontent.com/LIghtJUNction/gogogo/main/update.json"

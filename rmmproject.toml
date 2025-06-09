@@ -1,0 +1,33 @@
+id = "gogogo"
+name = "gogogo"
+description = "RMM项目 gogogo"
+requires_rmm = ">=0.1.7"
+versionCode = "C:\\Users\\light\\Documents\\GitHub\\gogogo"
+updateJson = "https://raw.githubusercontent.com/LIghtJUNction/gogogo/main/update.json"
+readme = "README.MD"
+changelog = "CHANGELOG.MD"
+license = "LICENSE"
+[[dependencies]]
+"dep?" = "?version"
+
+[[authors]]
+name = "LIghtJUNction"
+email = "email"
+
+[[scripts]]
+build = "rmm build"
+
+[urls]
+github = "https://github.com/LIghtJUNction/gogogo"
+
+[build]
+prebuild = "Rmake"
+build = "default"
+postbuild = "Rmake"
+
+[git]
+git_root = "C:\\Users\\light\\Documents\\GitHub\\gogogo"
+remote_url = "https://github.com/LIghtJUNction/gogogo.git"
+username = "LIghtJUNction"
+repo_name = "gogogo"
+is_in_repo_root = "True"
