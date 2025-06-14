@@ -1,6 +1,7 @@
 #!/system/bin/sh 
 if [ "$GOGOGO_ENV_LOADED" = "1" ]; then 
-    [ "$0" = "$BASH_SOURCE" ] && exit 0 || return 0 2>/dev/null 
+    # shellcheck disable=SC3028,SC2128
+    [ "$0" = "${BASH_SOURCE:-$0}" ] && exit 0 || return 0 2>/dev/null 
 fi 
  
 # 直接设置 Go 环境变量（写死的值）
@@ -14,7 +15,7 @@ export GO111MODULE='on'
 
 # 检查是否是开发模式
 if [ -f "/data/adb/modules/gogogo/gogogo.dev" ]; then
-    DEV_MODE=$(cat /data/adb/modules/gogogo/gogogo.dev 2>/dev/null | tr -d '\n\r ')
+    DEV_MODE=$(tr -d '\n\r ' < /data/adb/modules/gogogo/gogogo.dev 2>/dev/null)
     if [ "$DEV_MODE" = "1" ]; then
         export GOGOGO_DEV='1'
         export GOROOT_BOOTSTRAP='/data/adb/modules/gogogo/GOROOT_BOOTSTRAP'
@@ -24,10 +25,11 @@ fi
 # 从 gogogorc-core 获取 PATH 并导出
 PATH_OUTPUT=$(/data/adb/modules/gogogo/GOBIN/gogogorc-core 2>/dev/null) || {
     echo "请输入su，以root权限运行！"
+    # shellcheck disable=SC2317
     return 1 2>/dev/null || exit 1
 }
 
-export $PATH_OUTPUT
+export "${PATH_OUTPUT?}"
 
 export GOGOGO_ENV_LOADED=1
 echo "Go 环境变量已成功加载！"

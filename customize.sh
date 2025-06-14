@@ -1,4 +1,6 @@
-AUTHOR = "LIghtJUNction"
+#!/system/bin/sh
+# shellcheck disable=SC2034
+AUTHOR="LIghtJUNction"  # 用于标识脚本作者，可能被外部工具使用
 
 ui_print "========================================"
 ui_print "           GoGogo 模块安装程序           "
@@ -12,7 +14,7 @@ GOROOT="$MODPATH/GOROOT"
 GOTMP_DIR="$MODPATH/GOTMP"
 GOCACHE_DIR="$MODPATH/GOCACHE"
 GOBIN="$MODPATH/GOBIN"
-GOROOT_BOOTSTRAP_DIR="$MODPATH/GOROOT_BOOTSTRAP"
+# GOROOT_BOOTSTRAP_DIR="$MODPATH/GOROOT_BOOTSTRAP"  # 注释掉未使用的变量
 
 
 basic_check(){
@@ -45,22 +47,22 @@ basic_check(){
     ui_print "- 检测ROOT环境..."
     if [ "$KSU" = "true" ]; then
         ui_print "检测到 KernelSU: v$KSU_VER ($KSU_VER_CODE)"
-        touch $MODPATH/ksu
-        echo $KSU_VER > $MODPATH/ksu
+        touch "$MODPATH"/ksu
+        echo "$KSU_VER" > "$MODPATH"/ksu
 
     elif [ "$APATCH" = "true" ]; then
         APATCH_VER=$(cat "/data/adb/ap/version")
         ui_print "检测到 APatch: v$APATCH_VER"
         ui_print "  KERNEL_VERSION: $KERNEL_VERSION"
         ui_print "  KERNELPATCH_VERSION: $KERNELPATCH_VERSION"
-        touch $MODPATH/apatch
-        echo $APATCH_VER > $MODPATH/apatch
+        touch "$MODPATH"/apatch
+        echo "$APATCH_VER" > "$MODPATH"/apatch
 
     else
         ui_print "检测到 Magisk: v$MAGISK_VER ($MAGISK_VER_CODE)"
-        mv $MODPATH/boot-completed.sh $MODPATH/service.sh
-        touch $MODPATH/magisk
-        echo $MAGISK_VER > $MODPATH/magisk
+        mv "$MODPATH"/boot-completed.sh "$MODPATH"/service.sh
+        touch "$MODPATH"/magisk
+        echo "$MAGISK_VER" > "$MODPATH"/magisk
     fi
 }
 
@@ -130,7 +132,7 @@ else
 fi
 
 # 备份PATH 
-echo $PATH > $MODPATH/PATH.bak
+echo "$PATH" > "$MODPATH"/PATH.bak
 ui_print "已备份当前系统环境变量：$PATH"
 
 # 使用说明

@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\action.sh",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\customize.sh",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\META-INF\\com\\google\\android\\update-binary",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\system\\bin\\go",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\system\\bin\\gofmt",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\system\\bin\\gogogo",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "file_path": "C:\\Users\\light\\Documents\\GitHub\\gogogo\\system\\bin\\gogogorc",
+      "is_success": true,
+      "raw_output": "[]\n",
+      "warning_count": 0
+    }
+  ],
+  "summary": {
+    "failed_files": 0,
+    "successful_files": 7,
+    "total_errors": 0,
+    "total_files": 7,
+    "total_warnings": 0
+  },
+  "timestamp": "2025-06-12 09:33:20 UTC"
+}

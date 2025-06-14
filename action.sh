@@ -1,11 +1,9 @@
-#!system/bin/sh
+#!/system/bin/sh
 MODDIR=${0%/*}
 GOROOT_BOOTSTRAP="$MODDIR/GOROOT_BOOTSTRAP"
 GOROOT="$MODDIR/GOROOT"
 
 MAKEBASH="$GOROOT/src/make.bash"
-
-
 whoami
 
 Key_monitoring() {
@@ -56,34 +54,35 @@ build_from_src() {
     # 读取开发者模式标志
     if [ ! -f "$MODDIR/gogogo.dev" ]; then
         echo "开启开发者模式..."
-        echo "1" > $MODDIR/gogogo.dev
+        echo "1" > "$MODDIR"/gogogo.dev
     fi
 
 
-    mkdir -p $GOROOT_BOOTSTRAP
-    export GOROOT_BOOTSTRAP=$GOROOT_BOOTSTRAP
+    mkdir -p "$GOROOT_BOOTSTRAP"
+    export GOROOT_BOOTSTRAP="$GOROOT_BOOTSTRAP"
     # 将GOROOT 拷贝到GOROOT_BOOTSTRAP
-    cp -r $GOROOT/* $GOROOT_BOOTSTRAP/
-    echo "1" > $MODDIR/gogogo.dev
+    cp -r "$GOROOT"/* "$GOROOT_BOOTSTRAP"/
+    echo "1" > "$MODDIR"/gogogo.dev
 
 
     if [ ! -s "$GOROOT_BOOTSTRAP" ]; then
         echo "错误: GOROOT_BOOTSTRAP目录为空或不存在,正在复制GOROOT。"
-        cp -r $GOROOT/* $GOROOT_BOOTSTRAP/
-        chmod -R 755 $GOROOT_BOOTSTRAP/bin/
+        cp -r "$GOROOT"/* "$GOROOT_BOOTSTRAP"/
+        chmod -R 755 "$GOROOT_BOOTSTRAP"/bin/
     fi
 
 
     echo "开始构建Go源代码..." # 重定向到标准输出
-    echo $PATH
-    echo $GOROOT_BOOTSTRAP
-    cd $GOROOT/src || { echo "错误：无法进入Go源代码目录"; exit 1; }
-    . $MAKEBASH | tee -a $MODDIR/build.log 2>&1
-    cat $MODDIR/build.log
+    echo "$PATH"
+    echo "$GOROOT_BOOTSTRAP"
+    cd "$GOROOT"/src || { echo "错误：无法进入Go源代码目录"; exit 1; }
+    # shellcheck source=/dev/null
+    . "$MAKEBASH" | tee -a "$MODDIR"/build.log 2>&1
+    cat "$MODDIR"/build.log
 
     echo "Go源代码构建完成"
 
-    cat $GOROOT/src/build.log
+    cat "$GOROOT"/src/build.log
 
     echo "音量上：保持开发者模式（不删除自举拷贝） 音量下：退出开发者模式（删除自举拷贝） "
     
@@ -94,8 +93,8 @@ build_from_src() {
         exit 0
     elif [ "$choice" = "1" ]; then
         echo "选择：退出开发者模式"
-        echo "0" > $MODDIR/gogogo.dev
-        rm -rf $GOROOT_BOOTSTRAP
+        echo "0" > "$MODDIR"/gogogo.dev
+        rm -rf "$GOROOT_BOOTSTRAP"
         echo "已删除自举拷贝"
         exit 0
     else
@@ -106,13 +105,14 @@ build_from_src() {
 }
 
 if [ "$choice" = "0" ]; then
+    # shellcheck disable=SC2317
     build_from_src || echo "构建失败！PATH: $PATH"
 
 elif [ "$choice" = "1" ]; then
     echo "当前Go版本:"
     go version || echo "未找到Go！"
     echo "本地记录的go版本："
-    echo "$(cat $MODDIR/VERSION || echo "未记录版本")"
+    cat "$MODDIR"/VERSION || echo "未记录版本"
 
     echo "检查最新GO版本..."
     latest_go_version=$(curl -s https://go.dev/VERSION?m=text)
@@ -129,9 +129,12 @@ elif [ "$choice" = "1" ]; then
     if [ "$current_go_version" != "$latest_version_number" ]; then
         echo "有新版本可用，正在更新..."
         if update_go; then
+            # shellcheck disable=SC2317
             echo "$latest_go_version" > "$MODDIR/VERSION"
+            # shellcheck disable=SC2317
             echo "更新成功，已记录版本：$latest_go_version"
         else
+            # shellcheck disable=SC2317
             echo "更新失败，请检查网络连接或手动更新"
         fi
     else
@@ -140,6 +143,6 @@ elif [ "$choice" = "1" ]; then
 
 else
     echo "退出 && 关闭开发者模式"
-    echo "0" > $MODDIR/gogogo.dev
+    echo "0" > "$MODDIR"/gogogo.dev
     exit 0
 fi
