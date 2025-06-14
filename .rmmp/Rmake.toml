@@ -1,24 +1,26 @@
 [build]
-prebuild = ["echo 'Pre-build step'"]
-build = ["echo 'Main build step'"]
-postbuild = ["echo 'Post-build step'"]
+include = []
 exclude = [
-    ".git",
-    "target",
+    ".git*",
+    ".rmmp*",
+    "*.tmp",
     "*.log",
-    ".vscode",
-    ".idea",
-    "node_modules",
-    "__pycache__",
+]
+prebuild = ["echo 'Starting build'"]
+build = ["rmm"]
+postbuild = ["echo 'Build completed'"]
+
+[build.src]
+include = []
+exclude = [
+    ".git*",
+    "*.zip",
+    "dist*",
+    "build*",
+    "*.tmp",
+    "*.log",
+    "node_modules*",
 ]
 
-[package]
-compression = "default"
-zip_name = "default"
-
-[scripts]
-lint = "echo 'Linting code...'"
-test = "echo 'Running tests...'"
-
-
-
+[build.scripts]
+clean = '''Remove-Item '.rmmp\build' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item '.rmmp\dist' -Recurse -Force -ErrorAction SilentlyContinue; New-Item -Path '.rmmp\build' -ItemType Directory -Force; New-Item -Path '.rmmp\dist' -ItemType Directory -Force'''

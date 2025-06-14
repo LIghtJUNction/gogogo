@@ -1,0 +1,22 @@
+[project]
+id = "gogogo"
+description = "use golang on google/Android : gogogo, 在咕噜咕噜/Android 上使用 Go 编译一些东西"
+updateJson = "https://github.com/LIghtJUNction/gogogo/releases/latest/download/update.json"
+readme = "README.md"
+changelog = "CHANGELOG.md"
+license = "LICENSE"
+dependencies = []
+
+[project.scripts]
+build = "rmm build"
+
+[[authors]]
+name = "LIghtJUNction"
+email = "LIghtJUNction.me@gmail.com"
+
+[urls]
+github = "https://github.com/LIghtJUNction/gogogo"
+
+[build-system]
+requires = ["rmm>=0.3.0"]
+build-backend = "rmm"

@@ -1,40 +1,22 @@
+[project]
 id = "gogogo"
-name = "gogogo"
-description = "RMM项目 gogogo"
-requires_rmm = ">=0.2.5"
-version = "v0.1.0-b3ca78eb"
-versionCode = "2025061203"
-updateJson = "https://raw.githubusercontent.com/LIghtJUNction/gogogo/main/update.json"
-readme = "README.MD"
-changelog = "CHANGELOG.MD"
+description = "use golang on google/Android : gogogo, 在咕噜咕噜/Android 上使用 Go 编译一些东西"
+updateJson = "https://github.com/LIghtJUNction/gogogo/releases/latest/download/update.json"
+readme = "README.md"
+changelog = "CHANGELOG.md"
 license = "LICENSE"
 dependencies = []
+
+[project.scripts]
+build = "rmm build"
 
 [[authors]]
 name = "LIghtJUNction"
 email = "LIghtJUNction.me@gmail.com"
 
-[scripts]
-build = "rmm build"
-
 [urls]
 github = "https://github.com/LIghtJUNction/gogogo"
 
-[build]
-prebuild = ["Rmake"]
-build = ["default"]
-postbuild = ["Rmake"]
-exclude = [
-    ".git",
-    "target",
-    "*.log",
-    ".vscode",
-    ".idea",
-]
-
-[git]
-git_root = "."
-remote_url = "https://github.com/LIghtJUNction/gogogo.git"
-username = "LIghtJUNction"
-repo_name = "gogogo"
-is_in_repo_root = true
+[build-system]
+requires = ["rmm>=0.3.0"]
+build-backend = "rmm"

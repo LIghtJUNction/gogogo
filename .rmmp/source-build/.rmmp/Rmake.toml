@@ -1,0 +1,26 @@
+[build]
+include = []
+exclude = [
+    ".git*",
+    ".rmmp*",
+    "*.tmp",
+    "*.log",
+]
+prebuild = ["echo 'Starting build'"]
+build = ["rmm"]
+postbuild = ["echo 'Build completed'"]
+
+[build.src]
+include = []
+exclude = [
+    ".git*",
+    "*.zip",
+    "dist*",
+    "build*",
+    "*.tmp",
+    "*.log",
+    "node_modules*",
+]
+
+[build.scripts]
+clean = '''Remove-Item '.rmmp\build' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item '.rmmp\dist' -Recurse -Force -ErrorAction SilentlyContinue; New-Item -Path '.rmmp\build' -ItemType Directory -Force; New-Item -Path '.rmmp\dist' -ItemType Directory -Force'''
